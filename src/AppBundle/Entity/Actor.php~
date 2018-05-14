@@ -1,0 +1,28 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="actors")
+ *
+ */
+class Actor extends BaseEntity
+{
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false, options={"comment":"Actor name"})
+     */
+    private $actor_name;
+    
+    /**
+     * @ORM\Column(type="text", options={"comment":"Biography"})
+     */
+    private $actor_bio;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ActorRole", mappedBy="role_actor")
+     */
+    private $actor_roles;
+}
+

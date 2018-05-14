@@ -1,0 +1,305 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
+
+/**
+ * 
+ * @ORM\Entity
+ * @ORM\Table(name="users")
+ * @ORM\HasLifecycleCallbacks()
+ *
+ */
+class User extends BaseEntity implements  UserInterface, \Serializable
+{
+    
+    /**
+     * @ORM\Column(type="string", length=190, nullable=false, unique=true, options={"comment":"Email address"} )
+     */
+    private $user_email;
+    
+    /**
+     * @ORM\Column(type="string", length=15, nullable=false, options={"comment":"Nickname"} )
+     */
+    private $user_nickname;
+    
+    /**
+     * @ORM\Column(type="string", length=200, nullable=false, options={"comment":"User password"} )
+     */
+    private $user_pass;
+    
+    /**
+     * @ORM\Column(type="string", length=100, nullable=false, options={"comment":"Root rank"} )
+     */
+    private $user_group;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $user_banned;
+    
+    /**
+     * 
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="message_user_from")
+     */
+    private $user_messages_sent;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Recipient", mappedBy="recipient_user_id")
+     */
+    private $user_messages_received;
+    
+    public function __toString()
+    {
+        return $this->getUserEmail();
+    }
+    
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->getUsername(),
+            $this->getPassword(),
+            $this->getUserNickname(),
+            $this->getUserBanned()
+        ));
+    }
+    
+    public function unserialize($serialized)
+    {
+        list (
+            $newId,
+            $newUname,
+            $newPass,
+            $newNick,
+            $newBanned
+            ) = unserialize($serialized);
+            
+            $this->id=$newId;
+            $this->user_email=$newUname;
+            $this->user_pass=$newPass;
+            $this->user_nickname=$newNick;
+            $this->user_banned=$newBanned;
+    }
+
+    /**
+     * Set userEmail
+     *
+     * @param string $userEmail
+     *
+     * @return User
+     */
+    public function setUserEmail($userEmail)
+    {
+        $this->user_email = $userEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get userEmail
+     *
+     * @return string
+     */
+    public function getUserEmail()
+    {
+        return $this->user_email;
+    }
+
+    /**
+     * Set userNickname
+     *
+     * @param string $userNickname
+     *
+     * @return User
+     */
+    public function setUserNickname($userNickname)
+    {
+        $this->user_nickname = $userNickname;
+
+        return $this;
+    }
+
+    /**
+     * Get userNickname
+     *
+     * @return string
+     */
+    public function getUserNickname()
+    {
+        return $this->user_nickname;
+    }
+    
+    /**
+     * Set userPass
+     *
+     * @param string $userPass
+     *
+     * @return User
+     */
+    public function setUserPass($userPass)
+    {
+        $this->user_pass = $userPass;
+
+        return $this;
+    }
+
+    /**
+     * Get userPass
+     *
+     * @return string
+     */
+    public function getUserPass()
+    {
+        return $this->user_pass;
+    }
+
+    /**
+     * Set userGroup
+     *
+     * @param string $userGroup
+     *
+     * @return User
+     */
+    public function setUserGroup($userGroup)
+    {
+        $this->user_group = $userGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get userGroup
+     *
+     * @return string
+     */
+    public function getUserGroup()
+    {
+        return $this->user_group;
+    }
+    
+    public function getPassword()
+    {
+        return $this->getUserPass();
+    }
+
+    public function eraseCredentials()
+    {}
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return array("ROLE_".$this->getUserGroup());
+    }
+
+    public function getUsername()
+    {
+        return $this->getUserEmail();
+    }
+
+    /**
+     * Set userBanned
+     *
+     * @param boolean $userBanned
+     *
+     * @return User
+     */
+    public function setUserBanned($userBanned)
+    {
+        $this->user_banned = $userBanned;
+
+        return $this;
+    }
+
+    /**
+     * Get userBanned
+     *
+     * @return boolean
+     */
+    public function getUserBanned()
+    {
+        return $this->user_banned;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->user_messages_sent = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->user_messages_received = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add userMessagesSent
+     *
+     * @param \AppBundle\Entity\Message $userMessagesSent
+     *
+     * @return User
+     */
+    public function addUserMessagesSent(\AppBundle\Entity\Message $userMessagesSent)
+    {
+        $this->user_messages_sent[] = $userMessagesSent;
+
+        return $this;
+    }
+
+    /**
+     * Remove userMessagesSent
+     *
+     * @param \AppBundle\Entity\Message $userMessagesSent
+     */
+    public function removeUserMessagesSent(\AppBundle\Entity\Message $userMessagesSent)
+    {
+        $this->user_messages_sent->removeElement($userMessagesSent);
+    }
+
+    /**
+     * Get userMessagesSent
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserMessagesSent()
+    {
+        return $this->user_messages_sent;
+    }
+
+    /**
+     * Add userMessagesReceived
+     *
+     * @param \AppBundle\Entity\Recipient $userMessagesReceived
+     *
+     * @return User
+     */
+    public function addUserMessagesReceived(\AppBundle\Entity\Recipient $userMessagesReceived)
+    {
+        $this->user_messages_received[] = $userMessagesReceived;
+
+        return $this;
+    }
+
+    /**
+     * Remove userMessagesReceived
+     *
+     * @param \AppBundle\Entity\Recipient $userMessagesReceived
+     */
+    public function removeUserMessagesReceived(\AppBundle\Entity\Recipient $userMessagesReceived)
+    {
+        $this->user_messages_received->removeElement($userMessagesReceived);
+    }
+
+    /**
+     * Get userMessagesReceived
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserMessagesReceived()
+    {
+        return $this->user_messages_received;
+    }
+}

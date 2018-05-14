@@ -1,0 +1,32 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="recipients")
+ */
+class Recipient extends BaseEntity
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Message")
+     */
+    private $recipient_message_id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $recipient_user_id;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $recipient_keep;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $recipient_read;
+}
+

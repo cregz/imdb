@@ -1,0 +1,15 @@
+{# @var movie \AppBundle\Entity\Movie #}
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ parent() }}
+    
+    {% if movie is defined and movie %}
+        <h1>{{ movie.movieTitle }}</h1>
+        <p>{{ movie.movieYear }}</p>
+        <img src="{{ vich_uploader_asset(movie, 'imageFile') }}"/>
+        <br/>
+        <p>{{ movie.moviePlot }}</p>
+        
+        <a href="{{ path('addreview', {'movieId': movie.id}) }}">Write review</a>
+    {% endif %}
+{% endblock %}

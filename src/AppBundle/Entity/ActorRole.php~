@@ -1,0 +1,28 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="actor_roles")
+ *
+ */
+class ActorRole extends BaseEntity
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="Movie")
+     */
+    private $role_movie;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Actor")
+     */
+    private $role_actor;
+    
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    private $role_rolename;
+}
+

@@ -1,0 +1,33 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="reviews")
+ *
+ */
+class Review extends BaseEntity
+{
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $review_rating;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $review_text;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $review_author;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Movie")
+     */
+    private $review_movie;
+}
+

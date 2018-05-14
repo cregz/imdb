@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{{ parent() }}
+
+<h1>LOGIN</h1>
+<form action="{{ path('login') }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+    <label for="username">Username:</label>
+    <input type="email" name="_username" value="{{ last_username }}" />
+    <label for="password">Password:</label>
+    <input type="password" name="_password" />
+    <button type="submit">LOGIN</button>
+</form>
+<br/>
+<a href="{{ path('register') }}">Don't have an account yet? Register</a>
+
+{% endblock %}

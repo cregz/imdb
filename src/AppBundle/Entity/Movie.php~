@@ -1,0 +1,47 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="movies")
+ */
+class Movie extends BaseEntity
+{   
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    private $movie_title;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $movie_plot;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $movie_picture;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $movie_year;
+    
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $movie_rating;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="ActorRole", mappedBy="role_movie")
+     */
+    private $movie_roles;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Review", mappedBy="review_movie")
+     */
+    private $movie_reviews;
+}
+

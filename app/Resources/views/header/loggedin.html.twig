@@ -1,0 +1,17 @@
+{% extends 'header/headerbase.html.twig' %}
+{% block content %}
+    {% if is_granted("ROLE_ADMIN") %}
+	    {% set userclass = "admin" %}
+	{% else %}
+	    {% set userclass = "user" %}
+	{% endif %}
+<div class="header">
+	<a href="#default" class="logo">IMDB++</a>
+	<div class="header-right">
+		<a href="#profile" class="{{ userclass }}">{{ app.user.username }}</a> 
+		<a class="active" href="{{ path("home") }}">Home</a> 
+		<a href="{{ path('logout') }}">Logout</a> 
+		<a href="{{ path('listmovies') }}">Movies</a>
+	</div>
+</div>
+{% endblock %}

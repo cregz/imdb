@@ -1,0 +1,45 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="messages")
+ *
+ */
+class Message extends BaseEntity
+{
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     */
+    private $message_user_from;
+    
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Recipient", mappedBy="recipient_message_id")
+     */
+    private $message_recipients;
+    
+    
+    /**
+     * @ORM\Column(type="string", length=100, nullable=false)
+     */
+    private $message_subject;
+    
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $message_content;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="Message")
+     */
+    private $message_reply_to;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $message_sender_keep;
+}
+
