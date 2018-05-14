@@ -3,7 +3,7 @@
     {{ parent() }}
     {% for movie in movies %}
         <a href="{{ path('showmovie', {'movieId':movie.id}) }}">
-            <div>
+            <div class="movie-div">
                 <p>{{ movie.movieTitle }}</p>
             </div>
         </a>

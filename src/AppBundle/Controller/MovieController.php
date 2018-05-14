@@ -37,18 +37,11 @@ class MovieController extends Controller
      */
     private $reviewService;
     
-    /**
-     * 
-     * @var IMovieFacade
-     */
-    private $movieFacade;
-    
     public function setContainer(ContainerInterface $container = null)
     {
         parent::setContainer($container);
         $this->movieService=$container->get('app.movieService');
         $this->reviewService=$container->get('app.reviewService');
-        $this->movieFacade=$container->get('app.movieFacade');
     }
     
     /**
@@ -123,7 +116,6 @@ class MovieController extends Controller
         else{
             //TODO
         }
-       // $movie = $this->movieService->findById($movieId);
         $twigParams = array("movie"=>$movie, "form"=>$form->createView());
         return $this->render('reviewadd.html.twig', $twigParams);
         
