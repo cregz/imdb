@@ -44,6 +44,10 @@
 	{% else %}
 	Not logged in
 	{% endif %}
+	<div class="content-div">
+	{% block content %}
+	{% endblock %}
+	</div>
 	{% endblock %}
 	{% block javascripts %}
 	    

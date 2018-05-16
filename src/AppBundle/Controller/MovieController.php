@@ -57,7 +57,7 @@ class MovieController extends Controller
     
     /**
      * @Route("/movies/new", name="addmovie")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function addMovieAction(Request $request)
     {

@@ -2,8 +2,14 @@
 .header {
   overflow: hidden;
   background-color: #f1f1f1;
-  padding: 20px 10px;
+  padding: 5px 10px;
+  height: 50px;
+}
 
+.sticky {
+	position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 /* Style the header links */
@@ -61,6 +67,39 @@
   }
 }
 
+.content-div{
+	margin-top: 50px;
+}
+
 .form-div {
 	width:80%;
+}
+
+.movie-div {
+	padding: 5px;
+	margin-left:auto;
+	margin-right: auto;
+	min-height: 320px;
+	max-width: 80%;
+	border-style: solid;
+    border-width: 3px;
+    margin-top:10px;
+}
+
+.movie-div .movie-img {
+	width:200px;
+	height:300px;
+	min-height:300px;
+	border-style: solid;
+    border-width: 1px;
+}
+
+.movie-div .movie-title {
+	font-size: 18px;
+	
+}
+
+.movie-div .movie-picplot {
+	display: flex;
+	flex-direction: row;
 }

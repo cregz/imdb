@@ -47,6 +47,24 @@ abstract class BaseEntity
     }
     
     /**
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+    
+    /**
+     *
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt=$updatedAt;
+    }
+    
+    /**
      * 
      * @param \DateTime $createdOn
      */

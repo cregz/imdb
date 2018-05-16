@@ -1,7 +1,6 @@
 {# @var movie \AppBundle\Entity\Movie #}
 {% extends 'base.html.twig' %}
-{% block body %}
-    {{ parent() }}
+{% block content %}
     
     {% if movie is defined and movie %}
         <h1>{{ movie.movieTitle }}</h1>
