@@ -37,13 +37,6 @@
 	    {% include 'header/notloggedin.html.twig' %}
 	{% endif %}
 
-	{% if is_granted("ROLE_ADMIN") %}
-	<p>YOU ARE AN ADMIN</p>
-	{% elseif is_granted("ROLE_USER") %}
-	<p>YOU ARE A USER</p>
-	{% else %}
-	Not logged in
-	{% endif %}
 	<div class="content-div">
 	{% block content %}
 	{% endblock %}

@@ -48,6 +48,10 @@ services:
         class: AppBundle\Service\IReviewService
         public: true
         factory: [ "@app.crudFactory", getReviewService ]
+    app.messageService:
+        class: AppBundle\Service\IMessageService
+        public: true
+        factory: [ "@app.crudFactory", getMessageService ]
         
     app.facadeFactory:
         class: AppBundle\Service\FacadeFactory

@@ -1,14 +1,19 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-    {% for movie in movies %}
-        <div class="movie-div">
-            <a href="{{ path('showmovie', {'movieId':movie.id}) }}">
-                <p class="movie-title">{{ movie.movieTitle }} ({{ movie.movieYear }})</p>
-                <div class="movie-picplot">
-                    <img class="movie-img" alt="no picture available" src="{{ vich_uploader_asset(movie, 'imageFile') }}"/>
-                    <p>{{ movie.moviePlot }}</p>
-                </div>
-            </a>
+    <div class="flex-cont-col">
+        <div class="pagerfanta">
+            {{ pagerfanta(pager, 'twitter_bootstrap3') }}
         </div>
-    {% endfor %}
+        {% for movie in pager.currentPageResults %}
+            <div class="movie-div">
+                <a href="{{ path('showmovie', {'movieId':movie.id}) }}">
+                    <p class="movie-title">{{ movie.movieTitle }} ({{ movie.movieYear }})</p>
+                    <div class="movie-picplot">
+                        <img class="movie-img" alt="no picture available" src="{{ vich_uploader_asset(movie, 'imageFile') }}"/>
+                        <p>{{ movie.moviePlot }}</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

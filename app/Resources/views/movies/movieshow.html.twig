@@ -1,7 +1,7 @@
 {# @var movie \AppBundle\Entity\Movie #}
+{# @var review \AppBundle\Entity\Review #}
 {% extends 'base.html.twig' %}
 {% block content %}
-    
     {% if movie is defined and movie %}
         <h1>{{ movie.movieTitle }}</h1>
         <p>{{ movie.movieYear }}</p>
@@ -9,6 +9,30 @@
         <br/>
         <p>{{ movie.moviePlot }}</p>
         
-        <a href="{{ path('addreview', {'movieId': movie.id}) }}">Write review</a>
+        <div class="flex-cont-col">
+            <a href="{{ path('addreview', {'movieId': movie.id}) }}">Write review</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('editmovie', {'movieId': movie.id}) }}">Modify movie</a>
+                <a href="{{ path('deletemovie', {'movieId': movie.id}) }}">Delete movie</a>
+            {% endif %}
+        </div>
+        
+        {% if reviews is defined and reviews %}
+            <div class="flex-cont-row">
+                <p>Latest reviews</p>
+                {% for review in reviews %}
+                    {% if review.reviewAuthor.roles[0] is same as("ROLE_ADMIN") %}
+	                    {% set userclass = "admin" %}
+	                {% else %}
+	                    {% set userclass = "user" %}
+	                {% endif %}
+                    <div class="review-preview">
+                        <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a>
+                        <p>{{ review.reviewText }}</p>
+                    </div>
+                {% endfor %}
+                <a href="#more">See more...</a>
+            </div>
+        {% endif %}
     {% endif %}
 {% endblock %}

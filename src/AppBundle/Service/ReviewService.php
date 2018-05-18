@@ -43,6 +43,23 @@ class ReviewService extends CrudService implements IReviewService
     {
         return $this->getRepo()->findBy(['review_movie_id'=>$movieId]);
     }
+    
+    /**
+     * {@inheritDoc}
+     * @see \AppBundle\Service\IReviewService::listRecentForMovie()
+     */
+    public function listRecentForMovie($movieId)
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('r')
+           ->from('AppBundle:Review', 'r')
+           ->where('r.review_movie = :movieId')
+           ->orderBy('r.createdOn', 'DESC')
+           ->setMaxResults(5);
+        $qb->setParameters(['movieId'=>$movieId]);
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 
     public function createNew($reviewDTO, $user, $movie)
     {

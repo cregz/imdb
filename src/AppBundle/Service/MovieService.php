@@ -16,7 +16,11 @@ class MovieService extends CrudService implements IMovieService
     }
     
     public function deleteMovie($movieId)
-    {}
+    {
+        $movie = $this->findById($movieId);
+        $this->em->remove($movie);
+        $this->em->flush();
+    }
 
     public function getAllMovies()
     {

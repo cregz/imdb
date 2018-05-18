@@ -8,6 +8,7 @@
 
 .sticky {
 	position: fixed;
+	z-index:9001;
     top: 0;
     width: 100%;
 }
@@ -30,11 +31,11 @@
   font-weight: bold;
 }
 
-.header a.admin {
+a.admin {
   color:red;
 }
 
-.header a.user {
+a.user {
   color:green;
 }
 
@@ -80,6 +81,7 @@
 	margin-left:auto;
 	margin-right: auto;
 	min-height: 320px;
+	min-width: 80%;
 	max-width: 80%;
 	border-style: solid;
     border-width: 3px;
@@ -102,4 +104,24 @@
 .movie-div .movie-picplot {
 	display: flex;
 	flex-direction: row;
+}
+
+.flex-cont-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.pagerfanta {
+    margin-left:auto;
+	margin-right: auto;
+
+}
+
+.review-preview {
+	margin-left:auto;
+	margin-right: auto;
+	min-height: 200px;
+	max-width: 80%;
+	border-style:solid;
+	border-width:1px;
 }

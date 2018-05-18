@@ -26,6 +26,12 @@ interface IReviewService
     public function listForMovie($movieId);
     
     /**
+     * @return Review{}
+     * @param integer $movieId
+     */
+    public function listRecentForMovie($movieId);
+    
+    /**
      * 
      * @param Review $review
      */

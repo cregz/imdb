@@ -22,6 +22,9 @@ use AppBundle\Service\IMovieFacade;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Movie;
 use AppBundle\Entity\Review;
+use Pagerfanta\Pagerfanta;
+use Pagerfanta\Adapter\ArrayAdapter;
+use AppBundle\Service\MovieService;
 
 class MovieController extends Controller
 {
@@ -51,7 +54,13 @@ class MovieController extends Controller
     {
         $movies = $this->movieService->getAllMovies();
         
-        $twigParams = array("movies"=>$movies);
+        $page = $request->query->get('page', 1);
+        
+        $adapter = new ArrayAdapter($movies);
+        $pagerfanta = new PagerFanta($adapter);
+        $pagerfanta->setCurrentPage($page);
+        
+        $twigParams = array("movies"=>$movies, "pager"=>$pagerfanta);
         return $this->render('movies/movielist.html.twig', $twigParams);
     }
     
@@ -83,12 +92,50 @@ class MovieController extends Controller
     {
         if($movieId){
             $movie = $this->movieService->findById($movieId);
+            $reviews = $this->reviewService->listRecentForMovie($movie);
         }
         else{
             $this->redirectToRoute('listmovies');
         }
-        $twigParams = array("movie"=>$movie);
+        $twigParams = array("movie"=>$movie, "reviews"=>$reviews);
         return $this->render('movies/movieshow.html.twig', $twigParams);
+    }
+    
+    /**
+     * @Route("/movies/edit/{movieId}", name="editmovie")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function editAction(Request $request, $movieId=0)
+    {
+        if($movieId){
+            $movie = $this->movieService->findById($movieId);
+        }
+        else{
+            $this->redirectToRoute('listmovies');
+        }
+        $form = $this->createForm(MovieFormType::class, $movie);
+        
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $id = $this->movieService->saveMovie($movie);
+            
+            return $this->redirectToRoute('showmovie', ['movieId'=>$id]);
+        }
+        
+        return $this->render('movies/movieedit.html.twig', array('form'=>$form->createView(), 'movie'=>$movie));
+    }
+    
+    /**
+     * @Route("/movies/delete/{movieId}", name="deletemovie")
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteAction(Request $request, $movieId=0)
+    {
+        if($movieId){
+            $this->movieService->deleteMovie($movieId);
+        }
+        return $this->redirectToRoute('listmovies');
     }
     
     /**

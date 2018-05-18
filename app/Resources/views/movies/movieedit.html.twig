@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if movie is defined and movie %}
+    <div class="container">
+        <h1>Edit Movie</h1>
+        <div class="form-div">
+            {% form_theme form 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(form) }}
+                {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
+    {% endif %}
+{% endblock %}

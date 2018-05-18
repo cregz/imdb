@@ -15,6 +15,7 @@ class MessageSendFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+        ->add('recipients', TextType::class)
         ->add('subject', TextType::class)
         ->add('text', TextareaType::class)
         ->add("Register", SubmitType::class);
