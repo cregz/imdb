@@ -44,5 +44,10 @@ class CrudFactory
     {
         return new ReviewService($this->em, $this->formFactory, $this->request);
     }
+    
+    public function getMessageService()
+    {
+        return new MessageService($this->em, $this->formFactory, $this->request);
+    }
 }
 
