@@ -35,7 +35,6 @@ class UserController extends Controller
      */
     public function getUsers()
     {
-        
         $encoders = array(new XmlEncoder(), new JsonEncoder());
         $normalizers = array(new DateTimeNormalizer(), new ObjectNormalizer());
         
@@ -53,21 +52,6 @@ class UserController extends Controller
         $response = new Response($jsonContent);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
-    }
-    
-    /**
-     * @Route("/message/send/{recipientId}", name="sendmsg")
-     */
-    public function sendMessage(Request $request, $recipientId)
-    {
-        if($recipientId){
-            $movie = $this->movieService->converToDTO(array($this->movieService->findById($movieId)));
-        }
-        else{
-            //TODO
-        }
-        $twigParams = array("movie"=>$movie[0]);
-        return $this->render('movieshow.html.twig', $twigParams);
     }
 }
 

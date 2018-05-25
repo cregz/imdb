@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use AppBundle\Service\IUserService;
 use AppBundle\Service\IMessageService;
+use Symfony\Component\HttpFoundation\Request;
 
 class MessageController extends Controller
 {
@@ -23,7 +24,22 @@ class MessageController extends Controller
     {
         parent::setContainer($container);
         $this->movieService=$container->get('app.movieService');
-        $this->reviewService=$container->get('app.reviewService');
+        $this->messageService=$container->get('app.messageService');
+    }
+    
+    /**
+     * @Route("/message/send/{recipientId}", name="sendmsg")
+     */
+    public function sendMessage(Request $request, $recipientId)
+    {
+        if($recipientId){
+            $movie = $this->movieService->converToDTO(array($this->movieService->findById($movieId)));
+        }
+        else{
+            //TODO
+        }
+        $twigParams = array("movie"=>$movie[0]);
+        return $this->render('movieshow.html.twig', $twigParams);
     }
 }
 

@@ -36,8 +36,10 @@ class ReviewService extends CrudService implements IReviewService
         $this->em->flush();
     }
 
-    public function findAllForUser()
-    {}
+    public function findAllForUser($userId)
+    {
+        return $this->getRepo()->findBy(['review_user_id'=>$userId]);
+    }
 
     public function listForMovie($movieId)
     {

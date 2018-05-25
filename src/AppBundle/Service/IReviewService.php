@@ -10,8 +10,9 @@ interface IReviewService
 {
     /**
      * @return Review[]
+     * @param integer $userId
      */
-    public function findAllForUser();
+    public function findAllForUser($userId);
     
     /**
      * @return Review
