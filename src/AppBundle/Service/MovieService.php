@@ -28,7 +28,16 @@ class MovieService extends CrudService implements IMovieService
     }
 
     public function findByTitle($movieTitle)
-    {}
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('m')
+        ->from('AppBundle:Movie', 'm')
+        ->where('m.movie_title LIKE :movieTitle')
+        ->orderBy('m.movie_year', 'ASC');
+        $qb->setParameters(['movieTitle'=>'%'.$movieTitle.'%']);
+        $query = $qb->getQuery();
+        return $query->getResult();
+    }
 
     public function findByYear($year)
     {}

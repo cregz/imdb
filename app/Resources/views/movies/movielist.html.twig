@@ -1,6 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <div class="flex-cont-col">
+        
+        <!-- Search form -->
+        <form class="form-inline">
+            <input class="form-control" id="search-param" type="text" placeholder="Search" aria-label="Search">
+            <button type="button" class="btn btn-default" aria-label="Left Align" onclick="onMovieSearchClick()">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </button>
+        </form>
+                            
         <div class="pagerfanta">
             {{ pagerfanta(pager, 'twitter_bootstrap3') }}
         </div>

@@ -52,7 +52,14 @@ class MovieController extends Controller
      */
     public function listAction(Request $request)
     {
-        $movies = $this->movieService->getAllMovies();
+        
+        $search = $request->query->get('search', "");
+        
+        if($search !== "") {
+            $movies = $this->movieService->findByTitle($search);
+        }else{
+            $movies = $this->movieService->getAllMovies();
+        }
         
         $page = $request->query->get('page', 1);
         
