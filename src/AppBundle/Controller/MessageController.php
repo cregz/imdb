@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use AppBundle\Service\IUserService;
 use AppBundle\Service\IMessageService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class MessageController extends Controller
 {
