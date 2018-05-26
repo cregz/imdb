@@ -1,0 +1,23 @@
+{# @var review \AppBundle\Entity\Review #}
+{% extends 'base.html.twig' %}
+{% block content %}
+    {% if review is defined and review %}
+        <a href="{{ path('showmovie', {'movieId': review.reviewMovie.id}) }}" class="header1">{{ review.reviewMovie.movieTitle }}</a>
+        {% if review.reviewAuthor.roles[0] is same as("ROLE_ADMIN") %}
+	        {% set userclass = "admin" %}
+	    {% else %}
+	        {% set userclass = "user" %}
+	    {% endif %}
+	    <div class="review-full flex-cont-col">
+            <a class="{{ userclass }} author">Author: {{ review.reviewAuthor.userNickname }}</a>
+            <p>Rating: {{ review.reviewRating }}</p>
+            <p class="review-text align-center">{{ review.reviewText }}</p>
+        </div>
+        <div class="flex-cont-row">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('editreview', {'reviewId': review.id}) }}">Edit review</a>
+                <a href="{{ path('deletereview', {'reviewId': review.id}) }}">Delete review</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

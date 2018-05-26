@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h1>New review</h1>
+    <p>Movie: {{ movie.movieTitle }}</p>
+    <div class="form-div align-center">
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

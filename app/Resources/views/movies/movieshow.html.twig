@@ -18,7 +18,7 @@
         </div>
         
         {% if reviews is defined and reviews %}
-            <div class="flex-cont-row">
+            <div class="flex-cont-col">
                 <p>Latest reviews</p>
                 {% for review in reviews %}
                     {% if review.reviewAuthor.roles[0] is same as("ROLE_ADMIN") %}
@@ -27,11 +27,11 @@
 	                    {% set userclass = "user" %}
 	                {% endif %}
                     <div class="review-preview">
-                        <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a>
-                        <p>{{ review.reviewText }}</p>
+                        <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a>  <span>Rating: {{ review.reviewRating }}</span>
+                        <p><a href="{{ path("showreview", {'reviewId': review.id}) }}">{{ review.reviewText }}</a></p>
                     </div>
                 {% endfor %}
-                <a href="#more">See more...</a>
+                <a href="/reviews/list/movie/{{ movie.id }}">See more...</a>
             </div>
         {% endif %}
     {% endif %}

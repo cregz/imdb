@@ -106,6 +106,11 @@ a.user {
 	flex-direction: row;
 }
 
+.flex-cont-row {
+	display: flex;
+	flex-direction: row;
+}
+
 .flex-cont-col {
 	display: flex;
 	flex-direction: column;
@@ -122,6 +127,7 @@ a.user {
 	margin-right: auto;
 	min-height: 200px;
 	max-width: 80%;
+	min-width:80%;
 	border-style:solid;
 	border-width:1px;
 }
@@ -131,4 +137,38 @@ a.user {
 	margin-left:auto;
 	margin-right:auto;
 	/*width:50%;*/
+}
+
+.align-center {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.header1 {
+	display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    color: black;
+}
+
+.flex-cont-row a{
+	margin-right:20px;
+}
+
+.review-full .author{
+	display: block;
+	font-size: 1.5em;
+	margin-top:15px;
+	margin-bottom:15px;
+}
+
+.review-full .review-text {
+	border-style:solid;
+	border-width:1px;
+	width:80%;
+	min-height:200px;
 }

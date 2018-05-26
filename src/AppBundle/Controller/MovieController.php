@@ -171,7 +171,7 @@ class MovieController extends Controller
             //TODO
         }
         $twigParams = array("movie"=>$movie, "form"=>$form->createView());
-        return $this->render('reviewadd.html.twig', $twigParams);
+        return $this->render('reviews/reviewadd.html.twig', $twigParams);
         
     }
 }

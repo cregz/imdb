@@ -10,6 +10,11 @@ interface IReviewService
 {
     /**
      * @return Review[]
+     */
+    public function getAllReviews();
+    
+    /**
+     * @return Review[]
      * @param integer $userId
      */
     public function findAllForUser($userId);
@@ -27,7 +32,7 @@ interface IReviewService
     public function listForMovie($movieId);
     
     /**
-     * @return Review{}
+     * @return Review[]
      * @param integer $movieId
      */
     public function listRecentForMovie($movieId);

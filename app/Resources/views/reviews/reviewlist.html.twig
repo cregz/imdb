@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="flex-cont-col">
+        <div class="pagerfanta">
+            {{ pagerfanta(pager, 'twitter_bootstrap3') }}
+        </div>
+        <div class="flex-cont-col">
+        {% for review in pager.currentPageResults %}
+            {% if review.reviewAuthor.roles[0] is same as("ROLE_ADMIN") %}
+	            {% set userclass = "admin" %}
+	        {% else %}
+	            {% set userclass = "user" %}
+	        {% endif %}
+            <div class="review-preview">
+                <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a>
+                <p><a href="{{ path("showreview", {'reviewId': review.id}) }}">{{ review.reviewText }}</a></p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}

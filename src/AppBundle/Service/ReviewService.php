@@ -12,9 +12,16 @@ class ReviewService extends CrudService implements IReviewService
     {
         parent::__construct($em, $form, $request);
     }
+    
+    public function getAllReviews()
+    {
+        return $this->getRepo()->findAll();
+    }
 
     public function findById($reviewId)
-    {}
+    {
+        return $this->getRepo()->findOneBy(['id'=>$reviewId]);
+    }
 
     public function convertToDTO($review)
     {
@@ -34,16 +41,17 @@ class ReviewService extends CrudService implements IReviewService
     {
         $this->em->persist($review);
         $this->em->flush();
+        return $review->getId();
     }
 
     public function findAllForUser($userId)
     {
-        return $this->getRepo()->findBy(['review_user_id'=>$userId]);
+        return $this->getRepo()->findBy(['review_author'=>$userId]);
     }
 
     public function listForMovie($movieId)
     {
-        return $this->getRepo()->findBy(['review_movie_id'=>$movieId]);
+        return $this->getRepo()->findBy(['review_movie'=>$movieId]);
     }
     
     /**
@@ -76,7 +84,11 @@ class ReviewService extends CrudService implements IReviewService
     }
 
     public function deleteReview($reviewId)
-    {}
+    {
+        $review = $this->findById($reviewId);
+        $this->em->remove($review);
+        $this->em->flush();
+    }
 
     public function getRepo()
     {
