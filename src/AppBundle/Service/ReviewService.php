@@ -94,5 +94,20 @@ class ReviewService extends CrudService implements IReviewService
     {
         return $this->em->getRepository(Review::class);
     }
+    
+    /**
+     * {@inheritDoc}
+     * @see \AppBundle\Service\IReviewService::calculateAverageRating($movieId)
+     */
+    public function calculateAverageRating($movieId)
+    {
+        $qb = $this->em->createQueryBuilder();
+        $qb->select('AVG(r.review_rating) AS averagerating')
+        ->from('AppBundle:Review', 'r')
+        ->where('r.review_movie ='.$movieId);
+        $query = $qb->getQuery();
+        return $query->getSingleScalarResult();
+        
+    }
 }
 

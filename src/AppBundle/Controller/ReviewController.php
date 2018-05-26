@@ -67,7 +67,10 @@ class ReviewController extends Controller
             if($form->isSubmitted() && $form->isValid())
             {
                 $this->reviewService->saveReview($review);
-                
+                $avgRating = $this->reviewService->calculateAverageRating($review->getReviewMovie()->getId());
+                $movie = $this->movieService->findById($review->getReviewMovie()->getId());
+                $movie->setMovieRating($avgRating);
+                $this->movieService->saveMovie($movie);
                 return $this->redirectToRoute('showreview', ['reviewId'=>$reviewId]);
                 
             }
@@ -116,6 +119,10 @@ class ReviewController extends Controller
             $review = $this->reviewService->findById($reviewId);
             $movieId = $review->getReviewMovie()->getId();
             $this->reviewService->deleteReview($reviewId);
+            $avgRating = $this->reviewService->calculateAverageRating($movieId);
+            $movie = $this->movieService->findById($movieId);
+            $movie->setMovieRating($avgRating);
+            $this->movieService->saveMovie($movie);
         }
         else{
             //TODO

@@ -161,6 +161,10 @@ class MovieController extends Controller
             if($form->isSubmitted() && $form->isValid())
             {
                 $this->reviewService->saveReview($review);
+                $avgRating = $this->reviewService->calculateAverageRating($movieId);
+                $movie = $this->movieService->findById($movieId);
+                $movie->setMovieRating($avgRating);
+                $this->movieService->saveMovie($movie);
                 
                 return $this->redirectToRoute('showmovie', ['movieId'=>$movieId]);
                 

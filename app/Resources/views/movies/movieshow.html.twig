@@ -5,6 +5,7 @@
     {% if movie is defined and movie %}
         <h1>{{ movie.movieTitle }}</h1>
         <p>{{ movie.movieYear }}</p>
+        <p>Rating: {{ movie.movieRating }}</p>
         <img src="{{ vich_uploader_asset(movie, 'imageFile') }}"/>
         <br/>
         <p>{{ movie.moviePlot }}</p>
@@ -27,7 +28,7 @@
 	                    {% set userclass = "user" %}
 	                {% endif %}
                     <div class="review-preview">
-                        <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a>  <span>Rating: {{ review.reviewRating }}</span>
+                        <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a> <span>Rating: {{ review.reviewRating }}</span>
                         <p><a href="{{ path("showreview", {'reviewId': review.id}) }}">{{ review.reviewText }}</a></p>
                     </div>
                 {% endfor %}

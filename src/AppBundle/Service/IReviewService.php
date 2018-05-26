@@ -5,6 +5,7 @@ use AppBundle\Entity\Review;
 use AppBundle\Domain\ReviewObject;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Movie;
+use Symfony\Component\Finder\Comparator\NumberComparator;
 
 interface IReviewService
 {
@@ -61,4 +62,10 @@ interface IReviewService
      * @param Review $review
      */
     public function convertToDTO($review);
+    
+    /**
+     * @return double
+     * @param integer $movieId
+     */
+    public function calculateAverageRating($movieId);
 }
