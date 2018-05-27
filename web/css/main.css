@@ -172,3 +172,38 @@ a.user {
 	width:80%;
 	min-height:200px;
 }
+
+.movie-plot {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right:10px;
+}
+
+.width2{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	margin-left: 10px;
+	margin-right:10px;
+	width: 75%;
+}
+
+.marg-bot {
+	margin-bottom: 20px;
+}
+
+.message-div-prev{
+	border-style:solid;
+	border-width:1px;
+	width:80%;
+	margin-bottom:20px;
+	cursor: pointer;
+}
+
+.message-div{
+	border-style:solid;
+	border-width:1px;
+	width:80%;
+	min-height:200px;
+	margin-bottom:20px;
+}

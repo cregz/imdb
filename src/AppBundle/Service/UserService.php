@@ -26,6 +26,11 @@ class UserService extends CrudService implements IUserService
     {
         return $this->getRepo()->findOneBy(['id'=>$userId]);
     }
+    
+    public function getUserByNickname($usernickname)
+    {
+        return $this->getRepo()->findOneBy(['user_nickname'=>$usernickname]);
+    }
 
     public function banUser($userId)
     {

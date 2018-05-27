@@ -19,7 +19,7 @@
                     <p class="movie-title">{{ movie.movieTitle }} ({{ movie.movieYear }})</p>
                     <div class="movie-picplot">
                         <img class="movie-img" alt="no picture available" src="{{ vich_uploader_asset(movie, 'imageFile') }}"/>
-                        <p>{{ movie.moviePlot }}</p>
+                        <p class="movie-plot width2">{{ movie.moviePlot|length > 300 ? movie.moviePlot|slice(0, 300) ~ '...' : movie.moviePlot  }}</p>
                     </div>
                 </a>
             </div>

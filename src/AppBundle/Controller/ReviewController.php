@@ -11,6 +11,7 @@ use AppBundle\Form\ReviewFormType;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Service\IUserService;
 
 class ReviewController extends Controller
 {
@@ -26,13 +27,18 @@ class ReviewController extends Controller
      */
     private $movieService;
     
-    //private $userService;
+    /**
+     *
+     * @var IUserService
+     */
+    private $userService;
 
     public function setContainer(ContainerInterface $container = null)
     {
         parent::setContainer($container);
         $this->movieService=$container->get('app.movieService');
         $this->reviewService=$container->get('app.reviewService');
+        $this->userService=$container->get('app.userService');
     }
     
     /**
@@ -91,8 +97,12 @@ class ReviewController extends Controller
     public function listReviews(Request $request, $objectId = null, $_forwhat=null)
     {
         if($_forwhat === "movie"){
+            $movie = $this->movieService->findById($objectId);
+            $name = $movie->getMovieTitle();
             $reviews = $this->reviewService->listForMovie($objectId);
         } elseif ($_forwhat === "user"){
+            $user = $this->userService->getUserById($objectId);
+            $name = $user->getUserNickname();
             $reviews = $this->reviewService->findAllForUser($objectId);
         } else {
             $reviews = $this->reviewService->getAllReviews();
@@ -105,6 +115,9 @@ class ReviewController extends Controller
         $pagerfanta->setCurrentPage($page);
         
         $twigParams = array("reviews"=>$reviews, "pager"=>$pagerfanta);
+        if(isset($name)){
+            $twigParams["name"] = $name;
+        }
         return $this->render('reviews/reviewlist.html.twig', $twigParams);
     }
     

@@ -45,7 +45,28 @@ class MessageObject
      */
     private $text;
     
+    /**
+     * 
+     * @var integer
+     */
+    private $original_message_id;
     
+    /**
+     * @return number
+     */
+    public function getOriginal_message_id()
+    {
+        return $this->original_message_id;
+    }
+
+    /**
+     * @param number $original_message_id
+     */
+    public function setOriginal_message_id($original_message_id)
+    {
+        $this->original_message_id = $original_message_id;
+    }
+
     /**
      * @return string
      */

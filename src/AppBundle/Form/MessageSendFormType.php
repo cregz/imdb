@@ -18,7 +18,7 @@ class MessageSendFormType extends AbstractType
         ->add('recipients', TextType::class)
         ->add('subject', TextType::class)
         ->add('text', TextareaType::class)
-        ->add("Register", SubmitType::class);
+        ->add("Send", SubmitType::class);
         
     }
     

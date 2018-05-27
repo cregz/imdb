@@ -1,8 +1,0 @@
-{% extends 'base.html.twig' %}
-
-{% block content %}
-    {% if is_granted("ROLE_ADMIN") %}
-        <a href="{{ path('addmovie') }}">Add new movie</a>
-    {% endif %}
-    
-{% endblock %}

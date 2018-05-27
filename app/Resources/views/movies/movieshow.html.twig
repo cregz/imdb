@@ -8,13 +8,15 @@
         <p>Rating: {{ movie.movieRating }}</p>
         <img src="{{ vich_uploader_asset(movie, 'imageFile') }}"/>
         <br/>
-        <p>{{ movie.moviePlot }}</p>
+        <p class="movie-plot">{{ movie.moviePlot }}</p>
         
-        <div class="flex-cont-col">
-            <a href="{{ path('addreview', {'movieId': movie.id}) }}">Write review</a>
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('editmovie', {'movieId': movie.id}) }}">Modify movie</a>
-                <a href="{{ path('deletemovie', {'movieId': movie.id}) }}">Delete movie</a>
+        <div class="flex-cont-row">
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <a href="{{ path('addreview', {'movieId': movie.id}) }}">Write review</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('editmovie', {'movieId': movie.id}) }}">Modify movie</a>
+                    <a href="{{ path('deletemovie', {'movieId': movie.id}) }}">Delete movie</a>
+                {% endif %}
             {% endif %}
         </div>
         

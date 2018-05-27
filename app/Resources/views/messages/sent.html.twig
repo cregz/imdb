@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="flex-cont-col">
+        <h1>Sent messages</h1>
+        <div class="pagerfanta">
+            {{ pagerfanta(pager, 'twitter_bootstrap3') }}
+        </div>
+        
+        {% for message in pager.currentPageResults %}
+            <div class="message-div-prev align-center" onclick="onMessageClick({{ message.id }}, {{ message.messageRecipients[0].recipientUserId.id }}, 'out')">
+                <p>Sender: {{ message.messageUserFrom.userNickname }} <br>{{ message.createdOn|date('Y-m-d H:i:s') }}</p>
+                <p>To:
+                {% for r in message.messageRecipients %}
+                    {{ r.recipientUserId.userNickname }};
+                {% endfor %}
+                </p>
+                <p>Subject: {{ message.messageSubject }}</p>
+                <p>{{ message.messageContent|length > 100 ? message.messageContent|slice(0, 100) ~ '...' : message.messageContent }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

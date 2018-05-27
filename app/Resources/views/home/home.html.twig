@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Hello, {{ app.user.userNickname }}</h1>
+    <div class="flex-cont-row marg-bot">
+        <a href="{{ path('inbox') }}">Inbox</a>
+        <a href="{{ path('sentmsgs') }}">Sent messages</a>
+        <a href="{{ path('sendmsg') }}">Write new message</a>
+    </div>
+    <div class="flex-cont-row marg-bot">
+        <a href="/reviews/list">Latest reviews</a>
+        <a href="/reviews/list/user/{{ app.user.id }}">My reviews</a>
+        <a href="#myfavourites">My favourites</a>
+    </div>
+    {% if is_granted("ROLE_ADMIN") %}
+        {% include 'home/homeadmin.html.twig' %}
+    {% endif %}
+    
+{% endblock %}

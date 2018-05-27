@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="flex-cont-col">
+        <h1>{{ message.messageSubject }}</h1>
+        <p>from: {{ message.messageUserFrom.userNickname }} <br>sent on: {{ message.createdOn|date('Y-m-d H:i:s') }}<p>
+        {% if folder is same as("out") %}
+            <p>To:
+            {% for r in message.messageRecipients %}
+                {{ r.recipientUserId.userNickname }};
+            {% endfor %}
+        {% endif %}
+        <p>Content:</p>
+        <div class="message-div">
+            <p>{{ message.messageContent }}</p>
+        </div>
+        <div class="flex-cont-row">
+            {% if folder is same as("in") %}
+                <a href="{{ path('deletefrominbox', {'messageId':message.id}) }}">Delete Message</a>
+                <a href="/message/send/{{ message.messageUserFrom.id }}?reply={{ message.id }}">Reply</a>
+            {% else %}
+                <a href="{{ path('deletefromsent', {'messageId':message.id}) }}">Delete Message</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

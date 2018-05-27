@@ -147,6 +147,7 @@ class MovieController extends Controller
     
     /**
      * @Route("movies/addreview/{movieId}", name="addreview")
+     * @Security("has_role('ROLE_USER')")
      */
     public function addReviewAction(Request $request, $movieId=0)
     {

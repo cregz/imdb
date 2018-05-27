@@ -24,6 +24,12 @@ interface IUserService
     public function getUserByEmail($useremail);
     
     /**
+     * @return User
+     * @param string $usernickname
+     */
+    public function getUserByNickname($usernickname);
+    
+    /**
      * 
      * @param User $oneUser
      */

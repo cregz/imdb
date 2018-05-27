@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <div class="flex-cont-col">
+        {% if name is defined and name %}
+            <h1>Showing reviews for: {{ name }}</h1>
+        {% endif %}
         <div class="pagerfanta">
             {{ pagerfanta(pager, 'twitter_bootstrap3') }}
         </div>
@@ -12,7 +15,7 @@
 	            {% set userclass = "user" %}
 	        {% endif %}
             <div class="review-preview">
-                <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a>
+                <a class="{{ userclass }}">{{ review.reviewAuthor.userNickname }}</a> <span>Rating: {{ review.reviewRating }}</span>
                 <p><a href="{{ path("showreview", {'reviewId': review.id}) }}">{{ review.reviewText }}</a></p>
             </div>
         {% endfor %}
