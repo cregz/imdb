@@ -3,10 +3,12 @@
 {% block content %}
     
     <h1>REGISTER</h1>
-    {% form_theme form 'form_table_layout.html.twig' %}
+    <div class="form-div align-center">
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
     {{ form_start(form) }}
         {{ form_widget(form) }}
         <input type="submit" value="Register"
-               class="btn btn-default pull-right" />
+               class="btn btn-default pull-left" />
     {{ form_end(form) }}
+    </div>
 {% endblock %}

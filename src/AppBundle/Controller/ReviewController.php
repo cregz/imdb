@@ -12,6 +12,7 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Service\IUserService;
+use AppBundle\Entity\Review;
 
 class ReviewController extends Controller
 {
@@ -142,6 +143,41 @@ class ReviewController extends Controller
         }
         
         return $this->redirect('/reviews/list/movie/'.$movieId/*, ['_forwhat'=>'movie', 'movieId'=>$movieId]*/);
+    }
+    
+    /**
+     * @Route("movies/addreview/{movieId}", name="addreview")
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function addReviewAction(Request $request, $movieId=0)
+    {
+        if($movieId){
+            $movie = $this->movieService->findById($movieId);
+            $review = new Review();
+            $review->setReviewMovie($movie);
+            $review->setReviewAuthor($this->getUser());
+            $form = $this->createForm(ReviewFormType::class, $review);
+            
+            $form->handleRequest($request);
+            if($form->isSubmitted() && $form->isValid())
+            {
+                $this->reviewService->saveReview($review);
+                $avgRating = $this->reviewService->calculateAverageRating($movieId);
+                $movie = $this->movieService->findById($movieId);
+                $movie->setMovieRating($avgRating);
+                $this->movieService->saveMovie($movie);
+                
+                return $this->redirectToRoute('showmovie', ['movieId'=>$movieId]);
+                
+            }
+            
+        }
+        else{
+            //TODO
+        }
+        $twigParams = array("movie"=>$movie, "form"=>$form->createView());
+        return $this->render('reviews/reviewadd.html.twig', $twigParams);
+        
     }
 }
 

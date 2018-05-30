@@ -11,6 +11,7 @@
         <a href="/reviews/list">Latest reviews</a>
         <a href="/reviews/list/user/{{ app.user.id }}">My reviews</a>
         <a href="#myfavourites">My favourites</a>
+        <a href="{{ path('userlist') }}">List Users</a>
     </div>
     {% if is_granted("ROLE_ADMIN") %}
         {% include 'home/homeadmin.html.twig' %}

@@ -12,6 +12,7 @@ use Pagerfanta\Pagerfanta;
 use Pagerfanta\Adapter\ArrayAdapter;
 use AppBundle\Form\MessageSendFormType;
 use AppBundle\Domain\MessageObject;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class MessageController extends Controller
 {
@@ -35,6 +36,7 @@ class MessageController extends Controller
     
     /**
      * @Route("/message/inbox", name="inbox")
+     * @Security("has_role('ROLE_USER')")
      */
     public function inboxAction(Request $request)
     {
@@ -52,6 +54,7 @@ class MessageController extends Controller
     
     /**
      * @Route("/message/sent", name="sentmsgs")
+     * @Security("has_role('ROLE_USER')")
      */
     public function sentMessagesAction(Request $request)
     {
@@ -69,6 +72,7 @@ class MessageController extends Controller
     
     /**
      * @Route("/message/send/{recipientId}", name="sendmsg")
+     * @Security("has_role('ROLE_USER')")
      */
     public function sendMessage(Request $request, $recipientId=null)
     {
@@ -105,6 +109,7 @@ class MessageController extends Controller
     
     /**
      * @Route("/message/read/{messageId}", name="readmsg")
+     * @Security("has_role('ROLE_USER')")
      */
     public function showMessageAction(Request $request, $messageId)
     {
@@ -128,6 +133,7 @@ class MessageController extends Controller
     
     /**
      * @Route("/message/delinbox/{messageId}", name="deletefrominbox")
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteFromInboxAction(Request $request, $messageId)
     {
@@ -140,6 +146,7 @@ class MessageController extends Controller
     
     /**
      * @Route("/message/delout/{messageId}", name="deletefromsent")
+     * @Security("has_role('ROLE_USER')")
      */
     public function deleteFromSentAction(Request $request, $messageId)
     {

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <div class="flex-cont-col">
+                            
+        <div class="pagerfanta">
+            {{ pagerfanta(pager, 'twitter_bootstrap3') }}
+        </div>
+        {% for user in pager.currentPageResults %}
+            <div class="list-group width3 align-center">
+                <a href="{{ path('usershow', {'userId':user.id}) }}" class="list-group-item list-group-item-action">{{ user.userNickname }}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

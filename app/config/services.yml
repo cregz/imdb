@@ -52,12 +52,3 @@ services:
         class: AppBundle\Service\IMessageService
         public: true
         factory: [ "@app.crudFactory", getMessageService ]
-        
-    app.facadeFactory:
-        class: AppBundle\Service\FacadeFactory
-        arguments: ["@app.userService", "@app.movieService", "@app.reviewService"]
-        
-    app.movieFacade:
-        class: AppBundle\Service\IMovieFacade
-        public: true
-        factory: [ "@app.facadeFactory", getMovieFacade ]

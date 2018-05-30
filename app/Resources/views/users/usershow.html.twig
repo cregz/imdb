@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <h1>{{ user.userNickname }}</h1>
+    <p>Email: {{ user.username }}</p>
+    <a href="/reviews/list/user/{{ user.id }}">Show reviews</a>
+{% endblock %}

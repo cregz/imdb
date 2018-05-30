@@ -4,25 +4,25 @@ namespace AppBundle\Domain;
 class UserObject
 {
     /**
-     * 
+     *
      * @var integer
      */
     private $id;
     
     /**
-     * 
+     *
      * @var string
      */
     private $usernickname;
     
     /**
-     * 
+     *
      * @var string
      */
     private $clearpassword;
     
     /**
-     * 
+     *
      * @var string
      */
     private $email;
@@ -35,7 +35,7 @@ class UserObject
     {
         return $this->id;
     }
-
+    
     /**
      * @return string
      */
@@ -43,7 +43,7 @@ class UserObject
     {
         return $this->usernickname;
     }
-
+    
     /**
      * @return string
      */
@@ -51,7 +51,7 @@ class UserObject
     {
         return $this->clearpassword;
     }
-
+    
     /**
      * @return string
      */
@@ -59,7 +59,7 @@ class UserObject
     {
         return $this->email;
     }
-
+    
     /**
      * @param number $id
      */
@@ -67,7 +67,7 @@ class UserObject
     {
         $this->id = $id;
     }
-
+    
     /**
      * @param string $usernickname
      */
@@ -75,7 +75,7 @@ class UserObject
     {
         $this->usernickname = $usernickname;
     }
-
+    
     /**
      * @param string $clearpassword
      */
@@ -83,7 +83,7 @@ class UserObject
     {
         $this->clearpassword = $clearpassword;
     }
-
+    
     /**
      * @param string $email
      */
@@ -91,8 +91,7 @@ class UserObject
     {
         $this->email = $email;
     }
-
+    
     
     
 }
-
